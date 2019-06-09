@@ -1,0 +1,179 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="uk-card uk-text-right uk-width-1-1 col-md-offset-5">
+        <form id="book_form">
+            <table id="fieldlist1">
+                <tr>
+                    <th> <h2>查詢書籍</h2> </th>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <th> <h4 style="display: inline;">書名</h4> </th>
+                    <td colspan="2"> <input id="search_book_name" name="search_book_name" type="text" /></td>
+                </tr>
+                <tr>
+                    <th><h4 style="display: inline;">圖書類別</h4></th>
+                    <td colspan="2"><select id="search_book_category" name="search_book_category"></select></td>
+                </tr>
+                <tr>
+                    <th><h4 style="display: inline;">借閱人</h4></th>
+                    <td colspan="2"><select id="search_book_keeper" name="search_book_keeper"></select></td>
+                </tr>
+                <tr>
+                    <th><h4 style="display: inline;">借閱狀態</h4></th>
+                    <td colspan="2"><select id="search_book_status" name="search_book_status"></select></td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="col-md-4"><button type="button" class="btn  btn-dark" id="search_book">查詢</button></div>
+                        <div class="col-md-4"><button type="button" class="btn  btn-danger" id="delete_book">清除</button></div>
+                        <div class="col-md-4"><button type="button" class="btn  btn-primary" id="save_book">新增</button></div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <div class="uk-container align-center">
+        <div class="uk-card uk-text-left uk-width-1-1" id="add_window" style="display:none">
+            <form id="book_form">
+                <ul id="fieldlist">
+                    <li>
+                        <label class="required">書籍名稱</label>
+                        <input id="add_book_name" type="text" name="add_book_name" class="uk-width-1-1" required validationMessage="請輸入書名" />
+                        <span class="k-invalid-msg" data-for="book_name"></span>
+                    </li>
+                    <li>
+                        <label class="required">作者</label>
+                        <input id="add_book_author" type="text" name="add_book_author" class="uk-width-1-1" required validationMessage="請輸入作者" />
+                        <span class="k-invalid-msg" data-for="book_author"></span>
+                    </li>
+                    <li>
+                        <label class="required">出版商</label>
+                        <input id="add_book_publisher" type="text" name="add_book_publisher" class="uk-width-1-1" required validationMessage="請輸入作者" />
+                        <span class="k-invalid-msg" data-for="book_publisher"></span>
+                    </li>
+                    <li>
+                        <label class="required">內容簡介</label>
+                        <input id="add_book_introduction" type="text" name="add_book_introduction" class="uk-width-1-1" required validationMessage="請輸入作者" />
+                        <span class="k-invalid-msg" data-for="book_introduction"></span>
+                    </li>
+                    <li>
+                        <label class="required">購買日期</label>
+                        <input id="add_bought_datepicker" type="date" name="add_bought_datepicker" class="uk-width-1-1" required validationMessage="請輸入購買日期" />
+                        <span class="k-invalid-msg" data-for="bought_datepicker"></span>
+                    </li>
+                    <li>
+                        <label class="required">書籍分類</label>
+                        <select id="add_book_category" name="add_book_category" class="uk-width-1-1" required validationMessage="請選擇圖書類別"></select>
+                    </li>
+                    <li class="uk-text-right">
+                        <button type="button" class="k-button k-primary btn-add-book" id="save_book">新增</button>
+                    </li>
+
+                </ul>
+            </form>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+
+    <style>
+        #fieldlist1 {
+            border: 1px #969696 solid;
+            text-align: center;
+        }
+
+            #fieldlist1 th {
+                text-align: center;
+                padding: 10px;
+            }
+
+            #fieldlist1 td {
+                text-align: center;
+                padding: 10px;
+            }
+
+        #fieldlist {
+            margin: 0;
+            padding: 0;
+        }
+
+            #fieldlist li {
+                list-style: none;
+                padding-bottom: .7em;
+                text-align: left;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            #fieldlist label {
+                width: 100%;
+                display: block;
+                padding-bottom: .3em;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 12px;
+                color: #444;
+            }
+
+            #fieldlist li.status {
+                text-align: center;
+            }
+
+            #fieldlist li .k-widget:not(.k-tooltip),
+            #fieldlist li .k-textbox {
+                margin: 0 5px 5px 0;
+            }
+
+        .k-button {
+            padding-top: 1em;
+            margin-right: 2em;
+        }
+
+        .valid {
+            color: green;
+        }
+
+        .invalid {
+            color: red;
+        }
+
+        span.k-widget.k-tooltip-validation {
+            display;
+            inline-block;
+            width: 160px;
+            text-align: left;
+            border: 0;
+            padding: 0;
+            margin: 0;
+            background: none;
+            box-shadow: none;
+            color: red;
+        }
+
+        .k-tooltip-validation .k-warning {
+            display: none;
+        }
+    </style>
+
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/kendo.all.min.js"></script>
+    <script src="~/Scripts/script.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
